@@ -7,6 +7,11 @@ const Header = () => {
   const [text, setText] = useState("");
   const router = useRouter();
 
+  const onLogoClick = () => {
+    setText("");
+    router.push("/");
+  };
+
   const onChange = (e) => {
     setText(e.target.value);
   };
@@ -19,7 +24,7 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <SiHatenabookmark color="white" size={36} />
+      <SiHatenabookmark color="white" size={36} onClick={onLogoClick} />
       <HeaderSearchForm onSubmit={onSubmit}>
         <input
           value={text}
