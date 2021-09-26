@@ -5,7 +5,7 @@ const initialState = {
   data: [],
   loading: false,
   error: false,
-  page: 0,
+  page: 1,
   isEnd: false,
 };
 
@@ -18,12 +18,15 @@ const book = createSlice({
       return state;
     },
     getSuccess(state, action) {
-      state.query = action.payload.query;
-      state.data = [...state.data, ...action.payload.data.documents];
+      const { query, data, loadMore } = action.payload;
+      state.query = query;
+      state.data = loadMore
+        ? [...state.data, ...data.documents]
+        : data.documents;
       state.loading = false;
       state.error = false;
       state.page = state.page + 1;
-      state.isEnd = action.payload.data.meta.is_end;
+      state.isEnd = data.meta.is_end;
       return state;
     },
     getFailure(state, action) {
