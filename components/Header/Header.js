@@ -7,8 +7,13 @@ const Header = () => {
   const [text, setText] = useState("");
   const router = useRouter();
 
+  const onChange = (e) => {
+    setText(e.target.value);
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
+    if (!text.trim()) return;
     router.push(`/search/${text}`);
   };
 
@@ -20,7 +25,7 @@ const Header = () => {
           value={text}
           placeholder="검색 내용을 입력해주세요."
           autoComplete="off"
-          onChange={(e) => setText(e.target.value)}
+          onChange={onChange}
         />
       </HeaderSearchForm>
       <div style={{ opacity: 0 }}></div>
