@@ -1,13 +1,20 @@
+import Head from "next/head";
 import styled from "styled-components";
 import { FiSmile } from "react-icons/fi";
 
 export default function Home() {
   return (
-    <Container>
-      <FiSmile color="gray" size={32} />
-      <h1>도서 검색 사이트</h1>
-      <h2>WELCOME!</h2>
-    </Container>
+    <>
+      <Head>
+        <title>bookstore | 도서 검색 사이트</title>
+        <meta name="description" content={`Kakao Book API 도서 검색 사이트`} />
+      </Head>
+      <Container>
+        <FiSmile color="gray" size={32} />
+        <h1>도서 검색 사이트</h1>
+        <h2>WELCOME!</h2>
+      </Container>
+    </>
   );
 }
 

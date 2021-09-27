@@ -1,14 +1,24 @@
+import Head from "next/head";
 import styled from "styled-components";
 import { wrapper } from "../../store";
 import { bookActions } from "../../store/book";
 import { getBooks } from "../../lib/api/books";
 import BookList from "../../components/Book/BookList";
 
-const text = () => {
+const text = ({ text }) => {
   return (
-    <Container>
-      <BookList />
-    </Container>
+    <>
+      <Head>
+        <title>bookstore | {text} 검색</title>
+        <meta
+          name="description"
+          content={`${text}에 대한 Kakao Book API 결과 페이지`}
+        />
+      </Head>
+      <Container>
+        <BookList />
+      </Container>
+    </>
   );
 };
 
@@ -31,7 +41,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         store.dispatch(bookActions.getFailure());
         throw Error();
       }
-      return { props: {} };
+      return { props: { text } };
     }
 );
 
