@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import { ImSpinner3 } from "react-icons/im";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../store";
 import { bookActions } from "../../store/book";
@@ -46,7 +47,11 @@ function BookList() {
         ))}
       </UL>
       <div ref={loadMoreButtonRef} />
-      {loading && "로딩중..."}
+      {loading && (
+        <Spinner>
+          <ImSpinner3 color="#3F4448" size={50} />
+        </Spinner>
+      )}
     </>
   );
 }
@@ -66,7 +71,7 @@ const UL = styled.ul`
   gap: 10px;
   grid-template-columns: repeat(3, 1fr);
   width: 980px;
-  margin-top: 10px;
+  margin: 10px 0;
 
   @media (max-width: 980px) {
     grid-template-columns: repeat(2, 1fr);
@@ -74,5 +79,18 @@ const UL = styled.ul`
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
+  }
+`;
+
+const Spinner = styled.div`
+  margin: 24px 0;
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
